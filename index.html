@@ -13,13 +13,17 @@
         const vm = Vue.createApp({
             data(){
                 return {
-                    attr: "src",
-                    img:"https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
-
+                    counter: 0
                 };
             },
-            //template: `<img v-bind:src="img" v-bind:alt="img">`//Directiva v-bind para enviar datos desde codigo
-            template: `<img v-bind:[attr]="img">` //se puede enviar el atributo como variable
+            methods:{
+                increment(){
+                    console.log("click increment"),
+                    this.counter++;
+                }
+            },
+            //template: `<button v-on:click="increment">{{ counter }}</button>`
+            template: `<form v-on:submit.prevent="increment"><button>{{ counter }}</button></form>`//prevent sirve para evitar que se recargue el navegador
         }).mount('#app');
         console.log(vm);
     </script>
