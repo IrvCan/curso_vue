@@ -10,14 +10,18 @@
 
     <div id="app"></div>
     <script>
-        Vue.createApp({
+        const vm = Vue.createApp({
             data(){
                 return {
-                    text: "Hola mundo"
+                    attr: "src",
+                    img:"https://i.picsum.photos/id/1/5616/3744.jpg?hmac=kKHwwU8s46oNettHKwJ24qOlIAsWN9d2TtsXDoCWWsQ"
+
                 };
             },
-            template: `<div v-text="text"></div>`
+            //template: `<img v-bind:src="img" v-bind:alt="img">`//Directiva v-bind para enviar datos desde codigo
+            template: `<img v-bind:[attr]="img">` //se puede enviar el atributo como variable
         }).mount('#app');
+        console.log(vm);
     </script>
 </body>
 </html>
