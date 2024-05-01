@@ -13,27 +13,24 @@
         const vm = Vue.createApp({
             data(){
                 return {
-                    text:"Puerta cerrada",
+                    text:"Acceder a tu cuenta",
                     open: false,
-                    // styles: {
-                    //     backgroundColor: "#e5e5e5"
-                    // }
+                    username: ""
                 };
             },
             watch:{
                 open(value){
                     if(value) {
-                        this.text = "Puerta abierta";
-                        //this.styles.backgroundColor = "#b5e7a0";
+                        this.text = "Acceder a tu cuenta";
                     } else {
-                        this.text = "Puerta cerrada";
-                        //this.styles.backgroundColor = "#eca1a6"
+                        this.text = "Cierra sesión";
+                        this.username = "";
                     }
                 }
             },
             computed: {
                 label(){
-                    return this.open ? "Cerrar" : "Abrir";
+                    return this.open ? "Salir" : "Acceder";
                 },
                 styles(){
                     return this.open ? ["open"] : ["closed"];
@@ -42,9 +39,19 @@
             template: `
                 <div class="container" :class="styles">
                     <div> {{ text }} </div>
-                    <button @click="open = !open">{{ label }}</button>
+                    <div v-if="open">
+                        <p>Hola, {{username}}</p>
+                    </div>
+                    <div v-else>
+                        <label>Username</label>
+                        <input type="text" v-model="username"/>
+                    </div>
+                    <button @click="open = !open">
+                        <div v-if="!open">Acceder</div>
+                        <div v-else>Salir</div>
+                    </button>
                 </div>
-            `//:style="styles"
+            `
         }).mount('#app');
         console.log(vm);
     </script> 
